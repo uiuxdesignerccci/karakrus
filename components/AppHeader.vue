@@ -3,11 +3,11 @@ const { user, logout } = useAuth()
 const { show } = useHowToPlay()
 const route = useRoute()
 
-const links = [
-  { to: '/', label: 'Discover' },
-  { to: '/lobby', label: 'Live lobby', live: true },
+const links = computed(() => [
+  ...(user.value ? [] : [{ to: '/', label: 'Discover' }]),
+  { to: '/lobby', label: 'Lobby' },
   { to: '/invitations', label: 'Invitations' },
-]
+])
 
 const isActive = (to: string) => (to === '/' ? route.path === '/' : route.path.startsWith(to))
 const initial = computed(() => user.value?.firstName?.[0]?.toUpperCase() ?? '?')
@@ -19,7 +19,7 @@ const initial = computed(() => user.value?.firstName?.[0]?.toUpperCase() ?? '?')
       <BrandLogo />
       <nav class="site-nav" aria-label="Primary">
         <NuxtLink v-for="l in links" :key="l.to" :to="l.to" :class="{ active: isActive(l.to) }">
-          {{ l.label }}<i v-if="l.live" class="live-dot" aria-hidden="true" />
+          {{ l.label }}
         </NuxtLink>
         <button type="button" class="nav-btn" @click="show">How to play</button>
       </nav>

@@ -21,7 +21,7 @@ const toTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
       <nav class="footer-col" aria-label="Play">
         <h4>Play</h4>
         <NuxtLink to="/">Discover</NuxtLink>
-        <NuxtLink to="/lobby">Live lobby</NuxtLink>
+        <NuxtLink to="/lobby">Lobby</NuxtLink>
         <NuxtLink to="/invitations">Invitations</NuxtLink>
       </nav>
 

@@ -36,7 +36,7 @@ let timer: ReturnType<typeof setInterval> | undefined
 onMounted(() => (timer = setInterval(refresh, 5000)))
 onBeforeUnmount(() => clearInterval(timer))
 
-useHead({ title: 'Live lobby · Kara Krus' })
+useHead({ title: 'Lobby · Kara Krus' })
 </script>
 
 <template>
