@@ -112,7 +112,7 @@ useHead({ title: 'Profile · Kara Krus' })
           <CoinFace v-if="stats?.favorite" :side="stats.favorite" :size="34" />
           <b>{{ stats?.favorite ? SIDE_LABEL[stats.favorite] : '—' }}</b>
         </div>
-        <div class="side-split" :class="{ empty: !stats?.favorite }" :title="`Kara ${karaShare}% · Krus ${100 - karaShare}%`"><i :style="{ width: `${karaShare}%` }" /></div>
+        <div class="side-split" :class="{ 'is-empty': !stats?.favorite }" :title="`Kara ${karaShare}% · Krus ${100 - karaShare}%`"><i :style="{ width: `${karaShare}%` }" /></div>
       </div>
     </section>
 

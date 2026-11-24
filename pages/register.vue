@@ -45,7 +45,7 @@ useHead({ title: 'Join the club · Kara Krus' })
       <p v-if="error" class="form-error" role="alert">{{ error }}</p>
       <button type="submit" class="btn btn-gold wide" :disabled="busy">Create account</button>
     </form>
-    <p class="muted center">Already a member? <NuxtLink :to="{ path: '/login', query: route.query }">Sign in</NuxtLink></p>
+    <p class="muted center auth-switch">Already a member? <NuxtLink :to="{ path: '/login', query: route.query }">Sign in</NuxtLink></p>
     <p class="fine center">Secure sign-in · Demo credits only</p>
   </AuthShell>
 </template>

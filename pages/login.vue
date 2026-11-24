@@ -31,7 +31,7 @@ useHead({ title: 'Sign in · Kara Krus' })
       <p v-if="error" class="form-error" role="alert">{{ error }}</p>
       <button type="submit" class="btn btn-gold wide" :disabled="busy">Sign in</button>
     </form>
-    <p class="muted center">New around here? <NuxtLink :to="{ path: '/register', query: route.query }">Join the club</NuxtLink></p>
+    <p class="muted center auth-switch">New around here? <NuxtLink :to="{ path: '/register', query: route.query }">Join the club</NuxtLink></p>
     <aside class="dev-account">
       <small>DEVELOPMENT ACCOUNT</small>
       <code>player / MidnightPlayer123!</code>
