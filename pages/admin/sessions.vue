@@ -39,8 +39,10 @@ useHead({ title: 'Sessions · Kara Krus Admin' })
     </header>
 
     <section class="card">
-      <header class="card-head"><h3>Session history</h3><small class="muted">{{ filtered.length }} SESSIONS</small></header>
-      <p class="fine admin-note">Sign-ins, activity, and reasons sessions ended. Location is approximate and may reflect a VPN or network provider. Older sessions may be unavailable.</p>
+      <header class="card-intro">
+        <div><h3>Session history</h3><p class="muted">Sign-ins, recent activity, and the reason each session ended.</p></div>
+        <span class="tag tag-accent">{{ filtered.length }} sessions</span>
+      </header>
       <form class="admin-filters" @submit.prevent>
         <label class="grow">Search accounts<input v-model="q" class="search" placeholder="Name, username or email"></label>
         <label>Account type
@@ -77,6 +79,7 @@ useHead({ title: 'Sessions · Kara Krus Admin' })
       <div v-if="filtered.length > shown" class="pager">
         <button type="button" class="btn btn-ghost small" @click="shown += PAGE_SIZE">Load more sessions</button>
       </div>
+      <p class="fine card-foot">Location is approximate and may reflect a VPN or network provider. Older sessions may be unavailable.</p>
     </section>
   </div>
 </template>

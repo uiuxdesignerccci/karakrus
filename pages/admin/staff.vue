@@ -81,6 +81,23 @@ async function save() {
   }
 }
 
+/** Row "more actions" menu: one open at a time, closed by outside click or Escape. */
+const menuFor = ref<number | null>(null)
+function pick(mode: Mode, target: StaffAccount) {
+  menuFor.value = null
+  open(mode, target)
+}
+const closeMenu = () => (menuFor.value = null)
+const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') closeMenu() }
+onMounted(() => {
+  document.addEventListener('click', closeMenu)
+  document.addEventListener('keydown', onKey)
+})
+onBeforeUnmount(() => {
+  document.removeEventListener('click', closeMenu)
+  document.removeEventListener('keydown', onKey)
+})
+
 useHead({ title: 'Staff · Kara Krus Admin' })
 </script>
 
@@ -98,8 +115,12 @@ useHead({ title: 'Staff · Kara Krus Admin' })
     <p v-if="flash" class="admin-flash" role="status">{{ flash }}</p>
 
     <section class="card">
+      <header class="card-intro">
+        <div><h3>Team members</h3><p class="muted">Everyone with access to the staff portal, with their role and assigned rooms.</p></div>
+        <span class="tag tag-accent">{{ staff.length }} members</span>
+      </header>
       <form class="admin-filters" @submit.prevent>
-        <label>Search staff<input v-model="q" class="search" placeholder="Name or email"></label>
+        <label class="grow">Search staff<input v-model="q" class="search" placeholder="Name or email"></label>
       </form>
       <ul class="staff-list">
         <li v-for="s in staff" :key="s.id" class="staff-row">
@@ -120,10 +141,25 @@ useHead({ title: 'Staff · Kara Krus Admin' })
           <div v-if="s.isSuperAdmin" aria-hidden="true" />
           <div v-else class="actions">
             <button type="button" class="btn btn-ghost small" @click="open('profile', s)">Edit</button>
-            <button type="button" class="btn btn-ghost small" @click="open('rooms', s)">Assign rooms</button>
-            <button type="button" class="btn btn-ghost small" @click="open('role', s)">Change role</button>
-            <button type="button" class="btn btn-ghost small" @click="open('password', s)">Reset password</button>
-            <button type="button" class="btn btn-ghost small" @click="open('status', s)">{{ s.active ? 'Deactivate' : 'Reactivate' }}</button>
+            <div class="menu-wrap">
+              <button
+                type="button"
+                class="btn btn-ghost small menu-trigger"
+                aria-haspopup="menu"
+                :aria-expanded="menuFor === s.id"
+                :aria-label="`More actions for ${s.firstName} ${s.lastName}`"
+                @click.stop="menuFor = menuFor === s.id ? null : s.id"
+              >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2.4" /><circle cx="12" cy="12" r="2.4" /><circle cx="19" cy="12" r="2.4" /></svg>
+              </button>
+              <div v-if="menuFor === s.id" class="row-menu" role="menu" @click.stop>
+                <button type="button" role="menuitem" @click="pick('rooms', s)">Assign rooms</button>
+                <button type="button" role="menuitem" @click="pick('role', s)">Change role</button>
+                <button type="button" role="menuitem" @click="pick('password', s)">Reset password</button>
+                <hr>
+                <button type="button" role="menuitem" :class="{ danger: s.active }" @click="pick('status', s)">{{ s.active ? 'Deactivate account' : 'Reactivate account' }}</button>
+              </div>
+            </div>
           </div>
         </li>
       </ul>

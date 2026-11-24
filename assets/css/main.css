@@ -355,7 +355,16 @@ select { background: var(--panel-2); border: 1px solid var(--line-strong); borde
 .countdown { font-family: var(--heading); font-size: 56px; text-align: center; color: var(--accent); font-weight: 500; }
 .pool-card { display: grid; justify-items: center; gap: 4px; }
 .pool-card small { font-size: 10px; letter-spacing: .15em; color: var(--muted); }
-.settings-card { display: grid; gap: 10px; max-width: 640px; }
+.settings-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+.settings-card { display: flex; flex-direction: column; gap: 10px; margin: 0 !important; }
+.settings-card .form { flex: 1; display: flex; flex-direction: column; gap: 14px; }
+.settings-card .form .btn { margin-top: auto; align-self: flex-start; min-width: 200px; }
+.settings-wide { grid-column: 1 / -1; }
+.settings-wide .config { grid-template-columns: repeat(2, minmax(0, 1fr) minmax(0, auto)); gap: 12px 24px; background: var(--panel-2); border-radius: 14px; padding: 16px 20px; margin: 4px 0; }
+@media (max-width: 960px) {
+  .settings-grid { grid-template-columns: 1fr; }
+  .settings-wide .config { grid-template-columns: 1fr auto; }
+}
 .config { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; margin: 0; font-size: 14px; }
 .config dd { margin: 0; text-align: right; }
 .form .row .btn { width: 100%; }
@@ -650,11 +659,13 @@ a { color: var(--accent); }
 .tag-warn { color: var(--orange-ink); background: var(--orange-soft); border-color: #ff9a1f33; }
 .tag-bad { color: var(--danger); background: #ef446214; border-color: #ef446233; }
 .tag-accent { color: var(--accent); background: var(--accent-soft); border-color: var(--line-strong); }
+.tag-kara { color: var(--orange-ink); background: var(--orange-soft); border-color: #ff9a1f33; }
+.tag-krus { color: var(--krus); background: var(--krus-soft); border-color: #2f7cf633; }
 .btn-danger { background: var(--danger); color: #fff; border-color: transparent; }
 .btn-danger:hover:not(:disabled) { filter: brightness(1.06); }
 .link-btn { background: none; border: 0; padding: 0; color: var(--accent); font-size: 12px; font-weight: 600; cursor: pointer; }
 .label-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.avatar { width: 40px; height: 40px; flex: none; border-radius: 12px; display: grid; place-items: center; background: var(--purple-grad); color: #fff; font-family: var(--heading); font-weight: 800; font-size: 13px; }
+.staff-id .avatar, .role-protected .avatar { width: 40px; height: 40px; flex: none; border-radius: 12px; display: grid; place-items: center; background: var(--purple-grad); color: #fff; font-family: var(--heading); font-weight: 800; font-size: 13px; }
 
 .admin-modal { width: min(640px, 100%); max-height: calc(100vh - 40px); overflow-y: auto; }
 .admin-modal h2 { text-align: left; font-size: 22px; }
@@ -696,3 +707,124 @@ a { color: var(--accent); }
   .session-times { grid-template-columns: 1fr 1fr; }
   .role-protected { grid-template-columns: auto 1fr; }
 }
+
+/* ---------- admin: consistency pass ---------- */
+/* 1. filter bars: one grid, one control style */
+.admin-filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); align-items: end; gap: 12px 14px; }
+.admin-filters label { min-width: 0; font-weight: 600; }
+.admin-filters label.grow { grid-column: span 2; }
+.admin-filters .search, .admin-filters select, .admin-filters input:not([type='checkbox']) {
+  height: 44px; padding: 0 14px; background: var(--panel-2); border: 1px solid var(--line-strong); border-radius: 12px;
+  box-shadow: none; color: var(--text); font-size: 14px;
+}
+.admin-filters .search:focus, .admin-filters select:focus, .admin-filters input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px #6d3df21f; }
+.admin-filters .btn { height: 44px; justify-self: start; }
+.admin-filters .filter-actions { gap: 8px; grid-column: span 2; }
+.admin-filters .btn { white-space: nowrap; }
+.admin-filters .switch { height: 44px; font-weight: 600; color: var(--text); cursor: pointer; }
+.admin-filters .switch input, .check-grid input[type='checkbox'] { width: 18px; height: 18px; accent-color: var(--accent); flex: none; }
+@media (max-width: 640px) { .admin-filters label.grow { grid-column: auto; } }
+
+/* 2. staff rows share column widths so the role/status column lines up */
+.staff-row { grid-template-columns: minmax(220px, 1.1fr) minmax(200px, 1fr) minmax(0, 340px); }
+.staff-row .actions { max-width: none; }
+
+/* tables in admin cards */
+.table-wrap .bets td { vertical-align: middle; }
+.table-wrap .bets td b { font-family: var(--heading); font-weight: 700; }
+
+/* 4. destructive actions read as such */
+.btn-ghost.danger { color: var(--danger); }
+.btn-ghost.danger:hover:not(:disabled) { background: #ef446214; border-color: #ef446255; }
+.btn-danger { box-shadow: 0 8px 18px #ef446233; }
+
+/* modal polish */
+.admin-modal { gap: 18px; }
+.admin-modal header { padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.admin-modal .config { background: var(--panel-2); border-radius: 12px; padding: 14px 16px; }
+.admin-modal-actions { border-top: 1px solid var(--line); padding-top: 16px; }
+
+/* ---------- selects: custom chevron with breathing room ---------- */
+select {
+  -webkit-appearance: none; appearance: none;
+  padding-right: 42px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23827ba3' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 16px center !important;
+  background-size: 12px 8px !important;
+  cursor: pointer;
+}
+
+/* ---------- admin: row "more actions" menu ---------- */
+.menu-wrap { position: relative; }
+.btn.menu-trigger { width: 38px; padding: 0; }
+.menu-trigger[aria-expanded='true'] { background: var(--accent-soft); border-color: var(--accent); }
+.row-menu {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 20; min-width: 200px;
+  display: grid; gap: 2px; padding: 6px; background: var(--panel); border: 1px solid var(--line-strong);
+  border-radius: 14px; box-shadow: 0 18px 40px #2b1f6333, 0 2px 6px #2b1f631a; animation: pop .14s ease-out;
+}
+.row-menu button { text-align: left; background: none; border: 0; padding: 9px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; color: var(--text); }
+.row-menu button:hover, .row-menu button:focus-visible { background: var(--accent-soft); color: var(--accent); outline: none; }
+.row-menu button.danger { color: var(--danger); }
+.row-menu button.danger:hover, .row-menu button.danger:focus-visible { background: #ef446214; color: var(--danger); }
+.row-menu hr { border: 0; border-top: 1px solid var(--line); margin: 4px 6px; }
+.staff-row .actions { flex-wrap: nowrap; align-items: stretch; }
+.staff-row .menu-wrap { display: flex; }
+.menu-trigger svg { display: block; flex: none; }
+
+/* =====================================================================
+   ADMIN: settings-style consistency
+   Card = title + one-line description (+ count pill or action), tinted
+   inner panels for filters, table headers and data, footnotes at the end.
+   ===================================================================== */
+.card-intro { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+.card-intro h3 { font-size: 1.17em; }
+.card-intro p { margin-top: 6px; }
+.card-intro > .tag, .card-intro > .btn { flex: none; margin-top: 2px; }
+.card-foot { display: block; margin-top: 16px; }
+
+/* filter bar = tinted panel; controls inside go white for contrast */
+.admin-main .admin-filters { background: var(--panel-2); border-radius: 14px; padding: 14px 16px; margin-bottom: 18px; }
+.admin-main .admin-filters .search, .admin-main .admin-filters select, .admin-main .admin-filters input:not([type='checkbox']) { background-color: var(--panel); }
+
+/* tables: tinted header strip, soft row hover, no trailing rule */
+.admin-main .bets th { background: var(--panel-2); border-bottom: 0; padding: 12px 12px; }
+.admin-main .bets th:first-child { border-radius: 10px 0 0 10px; }
+.admin-main .bets th:last-child { border-radius: 0 10px 10px 0; }
+.admin-main .bets td { padding: 14px 12px; }
+.admin-main .bets tbody tr { transition: background .12s; }
+.admin-main .bets tbody tr:hover td { background: var(--panel-2); }
+.admin-main .bets tbody tr:last-child td { border-bottom: 0; }
+
+/* list rows (staff, sessions) */
+.staff-row, .session-row { padding: 16px 12px; margin: 0 -12px; border-radius: 12px; transition: background .12s; }
+.staff-row:hover, .session-row:hover { background: var(--panel-2); }
+.session-times { background: var(--panel-2); border-radius: 12px; padding: 10px 14px; }
+.session-row:hover .session-times { background: var(--panel); }
+
+/* roles: protected banner full width, roles in a two-column grid */
+.roles-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+.roles-grid .role-card { margin: 0 !important; display: flex; flex-direction: column; }
+.roles-grid .card-intro { margin-bottom: 14px; }
+.roles-grid .perm-chips { flex: 1; align-content: flex-start; background: var(--panel-2); border-radius: 14px; padding: 14px; }
+.roles-grid .perm-chips .tag { background: var(--panel); }
+.role-protected { margin-bottom: 24px !important; }
+.role-protected h3 { font-size: 1.17em; }
+.role-protected p { margin-top: 4px; }
+
+/* overview: host activity list as tinted rows */
+.audit li { padding: 12px 14px; border-bottom: 0; border-radius: 12px; }
+.audit li:nth-child(odd) { background: var(--panel-2); }
+
+@media (max-width: 960px) {
+  .roles-grid { grid-template-columns: 1fr; }
+  .card-intro { flex-wrap: wrap; }
+}
+
+/* ---------- admin sidebar icons ---------- */
+.admin-side nav a { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; font-weight: 500; transition: background .15s, color .15s; }
+.admin-side nav a .nav-icon { flex: none; color: var(--muted); transition: color .15s; }
+.admin-side nav a:hover .nav-icon { color: var(--accent); }
+.admin-side nav a.active { font-weight: 600; }
+.admin-side nav a.active .nav-icon { color: var(--accent); }

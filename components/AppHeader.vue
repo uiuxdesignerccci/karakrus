@@ -30,7 +30,10 @@ const initial = computed(() => user.value?.firstName?.[0]?.toUpperCase() ?? '?')
           <ThemeToggle />
           <button type="button" class="icon-btn" aria-label="Sign out" @click="logout">⎋</button>
         </template>
-        <NuxtLink v-else to="/login" class="btn btn-gold">Sign in</NuxtLink>
+        <template v-else>
+          <ThemeToggle />
+          <NuxtLink to="/login" class="btn btn-gold">Sign in</NuxtLink>
+        </template>
       </div>
     </div>
   </header>

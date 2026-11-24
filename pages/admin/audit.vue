@@ -64,7 +64,10 @@ useHead({ title: 'Audit Trail · Kara Krus Admin' })
     </header>
 
     <section class="card">
-      <header class="card-head"><h3>Audit records</h3><small class="muted">{{ filtered.length }} RECORDS · 10 PER PAGE</small></header>
+      <header class="card-intro">
+        <div><h3>Audit records</h3><p class="muted">Every administrative action, who performed it and how it turned out.</p></div>
+        <span class="tag tag-accent">{{ filtered.length }} records</span>
+      </header>
       <form class="admin-filters" @submit.prevent="apply">
         <label class="grow">Search activity<input v-model="draft.q" class="search" placeholder="Actor, action or target"></label>
         <label>Outcome
@@ -93,7 +96,6 @@ useHead({ title: 'Audit Trail · Kara Krus Admin' })
           <button type="button" class="btn btn-ghost small" @click="reset">Reset filters</button>
         </div>
       </form>
-      <p class="fine admin-note">Export includes all records matching the applied filters, across all pages. Times shown in Asia/Manila.</p>
 
       <div class="table-wrap">
         <table class="bets">
@@ -115,6 +117,7 @@ useHead({ title: 'Audit Trail · Kara Krus Admin' })
         <span class="muted">Page {{ page }} of {{ pages }}</span>
         <button type="button" class="btn btn-ghost small" :disabled="page === pages" @click="page++">Next</button>
       </nav>
+      <p class="fine card-foot">Export includes all records matching the applied filters, across all pages. Times shown in Asia/Manila. 10 records per page.</p>
     </section>
   </div>
 </template>

@@ -40,7 +40,10 @@ useHead({ title: 'Overview · Kara Krus Admin' })
     <AdminRoomTable :rooms="o.rooms" />
 
     <section class="card audit">
-      <header class="card-head"><h3>Host activity</h3><small class="muted">AUDIT TRAIL</small></header>
+      <header class="card-intro">
+        <div><h3>Host activity</h3><p class="muted">The latest actions taken across your tables.</p></div>
+        <NuxtLink to="/admin/audit" class="btn btn-ghost small">View audit trail</NuxtLink>
+      </header>
       <p v-if="!o.audit.length" class="muted">No activity yet.</p>
       <ul v-else>
         <li v-for="a in o.audit" :key="a.id">

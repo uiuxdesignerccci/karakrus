@@ -6,7 +6,11 @@ defineProps<{ rooms: Room[] }>()
 
 <template>
   <section class="card">
-    <header class="card-head"><h3>Your tables</h3><small class="muted">{{ rooms.length }} ROOMS</small></header>
+    <header class="card-intro">
+      <div><h3>Your tables</h3><p class="muted">Every table in the club with its current round, players and pool.</p></div>
+      <span class="tag tag-accent">{{ rooms.length }} rooms</span>
+    </header>
+    <div class="table-wrap">
     <table class="bets">
       <thead><tr><th>Room</th><th>Status</th><th>Round</th><th>Participants</th><th>Pool</th><th>Actions</th></tr></thead>
       <tbody>
@@ -23,5 +27,6 @@ defineProps<{ rooms: Room[] }>()
         </tr>
       </tbody>
     </table>
+    </div>
   </section>
 </template>

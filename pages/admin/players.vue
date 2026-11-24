@@ -65,13 +65,16 @@ useHead({ title: 'Players · Kara Krus Admin' })
     <div class="admin-stats">
       <div v-for="s in stats" :key="s.label" class="card"><b>{{ s.value }}</b><span class="muted">{{ s.label }}</span></div>
     </div>
-    <p class="fine admin-note">Active accounts are unblocked, including unverified players. Signed-in counts reflect unexpired sessions. Metrics cover all players.</p>
 
     <p v-if="message" class="admin-flash" role="status">{{ message }}</p>
 
     <section class="card">
+      <header class="card-intro">
+        <div><h3>Player accounts</h3><p class="muted">Search players, review their details and manage platform access.</p></div>
+        <span class="tag tag-accent">{{ players.length }} shown</span>
+      </header>
       <form class="admin-filters" @submit.prevent>
-        <label>Search players<input v-model="q" class="search" placeholder="Name, username or email"></label>
+        <label class="grow">Search players<input v-model="q" class="search" placeholder="Name, username or email"></label>
         <label>Verification
           <select v-model="verification">
             <option value="all">All verification states</option>
@@ -103,7 +106,7 @@ useHead({ title: 'Players · Kara Krus Admin' })
               <td>
                 <div class="actions">
                 <button type="button" class="btn btn-ghost small" :aria-label="`View details for ${p.username}`" @click="viewing = p">View details</button>
-                <button type="button" class="btn btn-ghost small" @click="confirming = p">{{ p.active ? 'Block' : 'Unblock' }}</button>
+                <button type="button" class="btn btn-ghost small" :class="{ danger: p.active }" @click="confirming = p">{{ p.active ? 'Block' : 'Unblock' }}</button>
                 </div>
               </td>
             </tr>
@@ -111,6 +114,7 @@ useHead({ title: 'Players · Kara Krus Admin' })
         </table>
       </div>
       <p v-if="!players.length" class="muted empty">No players match these filters.</p>
+      <p class="fine card-foot">Active accounts are unblocked, including unverified players. Signed-in counts reflect unexpired sessions. Metrics cover all players.</p>
     </section>
 
     <AdminModal v-if="viewing" :title="`Player: ${viewing.username}`" description="Player details and platform access." @close="viewing = null">
@@ -128,7 +132,7 @@ useHead({ title: 'Players · Kara Krus Admin' })
       </dl>
       <template #actions>
         <button type="button" class="btn btn-ghost" @click="viewing = null">Close</button>
-        <button type="button" class="btn btn-gold" @click="confirming = viewing">{{ viewing.active ? 'Block player' : 'Unblock player' }}</button>
+        <button type="button" class="btn" :class="viewing.active ? 'btn-danger' : 'btn-gold'" @click="confirming = viewing">{{ viewing.active ? 'Block player' : 'Unblock player' }}</button>
       </template>
     </AdminModal>
 

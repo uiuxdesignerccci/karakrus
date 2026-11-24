@@ -77,20 +77,24 @@ useHead({ title: 'Roles · Kara Krus Admin' })
       <span class="tag tag-accent">Protected</span>
     </section>
 
+    <div class="roles-grid">
     <section v-for="r in data?.roles" :key="r.id" class="card role-card">
-      <header class="card-head">
-        <h3>{{ r.name }} <span class="tag">{{ r.permissions.length }} permissions</span></h3>
+      <header class="card-intro">
+        <div>
+          <h3>{{ r.name }}</h3>
+          <p class="muted">{{ r.permissions.length }} permissions · {{ r.staffCount }} staff assigned</p>
+        </div>
         <div class="actions">
           <button type="button" class="btn btn-ghost small" @click="edit(r)">Edit role</button>
-          <button type="button" class="btn btn-ghost small" @click="deleting = r; error = ''">Delete role</button>
+          <button type="button" class="btn btn-ghost small danger" @click="deleting = r; error = ''">Delete role</button>
         </div>
       </header>
       <div class="perm-chips">
         <span v-for="p in r.permissions" :key="p" class="tag">{{ PERMISSIONS[p] ?? p }}</span>
         <span v-if="!r.permissions.length" class="muted">No permissions assigned.</span>
       </div>
-      <small class="muted">{{ r.staffCount }} staff assigned</small>
     </section>
+    </div>
 
     <AdminModal
       v-if="editing"

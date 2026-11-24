@@ -45,11 +45,13 @@ useHead({ title: 'Settings · Kara Krus Admin' })
       </div>
     </header>
 
+    <div class="settings-grid">
     <section class="card settings-card">
       <h3>Club announcement</h3>
       <p class="muted">A short message displayed at the top of the player portal.</p>
       <form class="form" @submit.prevent="saveAnnouncement">
         <label>Announcement<input v-model="announcement" maxlength="200"></label>
+        <p class="fine"><span>Leave empty to hide the banner.</span><span>{{ announcement.length }}/200</span></p>
         <button type="submit" class="btn btn-gold">Save announcement</button>
         <p v-if="annMsg" class="muted">{{ annMsg }}</p>
       </form>
@@ -66,12 +68,13 @@ useHead({ title: 'Settings · Kara Krus Admin' })
       </form>
     </section>
 
-    <section class="card settings-card">
+    <section class="card settings-card settings-wide">
       <h3>Game configuration</h3>
       <dl class="config">
         <template v-for="[k, v] in config" :key="k"><dt class="muted">{{ k }}</dt><dd>{{ v }}</dd></template>
       </dl>
       <p class="fine">Countdown, credit limits, and host video are configured in each room. SMTP credentials belong in server environment variables.</p>
     </section>
+    </div>
   </div>
 </template>
