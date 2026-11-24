@@ -828,3 +828,11 @@ select {
 .admin-side nav a:hover .nav-icon { color: var(--accent); }
 .admin-side nav a.active { font-weight: 600; }
 .admin-side nav a.active .nav-icon { color: var(--accent); }
+
+/* ============ ADMIN: shared page padding ============ */
+.admin { --admin-pad-x: 48px; --admin-pad-top: 44px; }
+.admin-top { padding: 16px var(--admin-pad-x); }
+.admin-main { box-sizing: border-box; max-width: calc(1180px + var(--admin-pad-x) * 2); padding: var(--admin-pad-top) var(--admin-pad-x) 96px; }
+@media (max-width: 1200px) { .admin { --admin-pad-x: 36px; --admin-pad-top: 36px; } }
+@media (max-width: 960px) { .admin { --admin-pad-x: 24px; --admin-pad-top: 28px; } }
+@media (max-width: 560px) { .admin { --admin-pad-x: 16px; --admin-pad-top: 22px; } }
