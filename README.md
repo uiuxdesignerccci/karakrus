@@ -23,6 +23,11 @@ Dev accounts (seeded in `server/utils/db.ts`): `player / MidnightPlayer123!`, `a
 | `/admin` | `pages/admin/index.vue` (layout `admin`) |
 | `/admin/rooms` | `pages/admin/rooms/index.vue` |
 | `/admin/rooms/:id` | `pages/admin/rooms/[id].vue` (host controls, streaming, settle round) |
+| `/admin/players` | `pages/admin/players.vue` (metrics, filters, details, block / unblock) |
+| `/admin/staff` | `pages/admin/staff.vue` (create, edit, role, rooms, password reset, deactivate) |
+| `/admin/roles` | `pages/admin/roles.vue` (roles and permissions; Super Admin is protected) |
+| `/admin/audit` | `pages/admin/audit.vue` (filters, 10 per page, CSV export) |
+| `/admin/sessions` | `pages/admin/sessions.vue` (session history for staff and players) |
 | `/admin/settings` | `pages/admin/settings.vue` (announcement, password, game config) |
 
 "How to play" / "Rules & payouts" is a modal (`components/HowToPlayModal.vue`), not a route.

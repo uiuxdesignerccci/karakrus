@@ -38,6 +38,9 @@ function seed(): Db {
     users: [
       { id: 1, username: 'admin', password: 'MidnightAdmin123!', firstName: 'Kara', lastName: 'Admin', email: 'admin@local.invalid', role: 'admin', balance: 0 },
       { id: 2, username: 'player', password: 'MidnightPlayer123!', firstName: 'Alex', lastName: 'Reyes', email: 'player@local.invalid', role: 'player', balance: 100000 },
+      { id: 5, username: 'maria.s', password: 'MidnightPlayer123!', firstName: 'Maria', lastName: 'Santos', email: 'maria@local.invalid', role: 'player', balance: 254000 },
+      { id: 6, username: 'jdc', password: 'MidnightPlayer123!', firstName: 'Juan', lastName: 'Dela Cruz', email: 'juan@local.invalid', role: 'player', balance: 12500 },
+      { id: 7, username: 'bea.l', password: 'MidnightPlayer123!', firstName: 'Bea', lastName: 'Lim', email: 'bea@local.invalid', role: 'player', balance: 0 },
     ],
     rooms: [
       { ...base, id: 3, name: 'The High Table', subtitle: 'Bigger pools. Same single coin.', duration: 60, min_bet: 10000, max_bet: 500000, status: 'waiting', round_number: 0 },

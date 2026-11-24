@@ -123,3 +123,71 @@ export interface RegisterBody {
   password: string
   ageConfirmed: boolean
 }
+
+// ---- Admin: players, staff, roles, audit, sessions ----
+
+export interface AdminPlayer {
+  id: number
+  username: string
+  firstName: string
+  lastName: string
+  email: string
+  birthdate: string
+  balance: number
+  verified: boolean
+  active: boolean
+  signedIn: boolean
+}
+
+export interface AdminPlayersResponse {
+  metrics: { total: number; active: number; blocked: number; signedIn: number }
+  players: AdminPlayer[]
+}
+
+export interface StaffRole {
+  id: number
+  name: string
+  permissions: string[]
+}
+
+export interface StaffAccount {
+  id: number
+  firstName: string
+  lastName: string
+  email: string
+  isSuperAdmin: boolean
+  active: boolean
+  role: { id: number; name: string } | null
+  roomIds: number[]
+  activeSessions: number
+}
+
+export type AuditOutcome = 'succeeded' | 'failed'
+export type AuditActorKind = 'staff' | 'player' | 'system' | 'detector' | 'unauthenticated'
+
+export interface AuditRecord {
+  id: number
+  action: string
+  target: string
+  room_id: number | null
+  actor: string
+  actorKind: AuditActorKind
+  outcome: AuditOutcome
+  created_at: number
+}
+
+export type SessionEndReason = 'logout' | 'replaced' | 'revoked' | 'password_changed' | 'password_reset' | 'deactivated' | 'expired'
+
+export interface SessionRecord {
+  id: number
+  accountName: string
+  username: string
+  accountKind: 'staff' | 'player'
+  device: string
+  location: string
+  signedInAt: number
+  lastActiveAt: number
+  expiresAt: number
+  endedAt: number | null
+  endReason: SessionEndReason | null
+}

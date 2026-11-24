@@ -6,6 +6,11 @@ const menuOpen = ref(false)
 const links = [
   { to: '/admin', label: 'Overview' },
   { to: '/admin/rooms', label: 'Rooms' },
+  { to: '/admin/players', label: 'Players' },
+  { to: '/admin/staff', label: 'Staff' },
+  { to: '/admin/roles', label: 'Roles' },
+  { to: '/admin/audit', label: 'Audit Trail' },
+  { to: '/admin/sessions', label: 'Sessions' },
   { to: '/admin/settings', label: 'Settings' },
 ]
 const isActive = (to: string) => (to === '/admin' ? route.path === '/admin' : route.path.startsWith(to))
