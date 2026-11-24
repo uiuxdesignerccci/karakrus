@@ -4,7 +4,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const { user, loaded, fetchUser } = useAuth()
   if (!loaded.value) await fetchUser()
 
-  const isPublic = PUBLIC_PATHS.has(to.path)
+  // Room pages are viewable signed out; the page itself hides the stream, chat and betting.
+  const isPublic = PUBLIC_PATHS.has(to.path) || /^\/rooms\/[^/]+$/.test(to.path)
   const isAdminPath = to.path.startsWith('/admin')
 
   if (isAdminPath && to.path !== '/admin/login') {

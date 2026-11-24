@@ -38,7 +38,7 @@ useHead(() => ({ title: `${room.value.name} · Kara Krus` }))
 
 <template>
   <div class="page room-page">
-    <nav class="crumbs" aria-label="Breadcrumb"><NuxtLink to="/lobby">Lobby</NuxtLink><span>/</span><span>{{ room.name }}</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><NuxtLink :to="user ? '/lobby' : '/'">{{ user ? 'Lobby' : 'Home' }}</NuxtLink><span>/</span><span>{{ room.name }}</span></nav>
 
     <header class="room-head">
       <div>
@@ -52,20 +52,24 @@ useHead(() => ({ title: `${room.value.name} · Kara Krus` }))
 
     <div class="room-layout">
       <div class="room-main">
-        <RoomVideo :room="room" />
+        <RoomVideo v-if="user" :room="room" />
+        <RoomSignInGate v-else />
         <div class="room-sub">
-          <span>⚇ {{ room.players }} betting this round</span>
-          <span>⛨ Host-confirmed result</span>
+          <span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8" /></svg> {{ room.players }} betting this round</span>
+          <span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8.3 7.5 9.5 4.4-1.2 7.5-4.9 7.5-9.5V6L12 3Z" /><path d="m8.8 12.2 2.2 2.2 4.2-4.4" /></svg> Host-confirmed result</span>
         </div>
-        <RoomRecentFlips :history="room.history" />
+        <RoomChat v-if="user" :room-id="room.id" :username="user.username" />
+        <RoomRecentFlips v-else :history="room.history" />
       </div>
       <div class="room-side">
-        <RoomBetPanel :room="room" :balance="user?.balance ?? 0" :placing="placing" @place="place" />
+        <RoomBetPanel :room="room" :balance="user?.balance ?? 0" :placing="placing" :guest="!user" @place="place" />
         <p v-if="betError" class="form-error" role="alert">{{ betError }}</p>
+        <template v-if="user">
+          <RoomRecentFlips :history="room.history" />
+          <RoomBetsList :bets="bets" />
+        </template>
       </div>
     </div>
 
-    <RoomBetsList :bets="bets" />
-    <RoomChat :room-id="room.id" :username="user?.username ?? ''" />
   </div>
 </template>

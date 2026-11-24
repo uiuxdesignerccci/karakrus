@@ -22,7 +22,6 @@ const variant = computed(() => (props.room.id % 3 === 0 ? 'kara' : props.room.id
     <div class="room-body">
       <div class="room-title">
         <h3>{{ room.name }}</h3>
-        <span aria-hidden="true">↗</span>
       </div>
       <p class="muted">{{ room.subtitle }}</p>
       <div class="room-meta">

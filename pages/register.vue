@@ -2,6 +2,7 @@
 definePageMeta({ layout: 'auth' })
 
 const { register } = useAuth()
+const route = useRoute()
 const form = reactive({ firstName: '', lastName: '', birthdate: '', email: '', username: '', password: '', ageConfirmed: false })
 const showPassword = ref(false)
 const error = ref('')
@@ -12,7 +13,7 @@ async function submit() {
   busy.value = true
   try {
     await register({ ...form })
-    await navigateTo('/lobby')
+    await navigateTo(safeRedirect(route.query.redirect))
   } catch (e) {
     error.value = (e as { statusMessage?: string }).statusMessage ?? 'Could not create your account'
   } finally {
@@ -44,7 +45,7 @@ useHead({ title: 'Join the club · Kara Krus' })
       <p v-if="error" class="form-error" role="alert">{{ error }}</p>
       <button type="submit" class="btn btn-gold wide" :disabled="busy">Create account</button>
     </form>
-    <p class="muted center">Already a member? <NuxtLink to="/login">Sign in</NuxtLink></p>
+    <p class="muted center">Already a member? <NuxtLink :to="{ path: '/login', query: route.query }">Sign in</NuxtLink></p>
     <p class="fine center">Secure sign-in · Demo credits only</p>
   </AuthShell>
 </template>

@@ -27,9 +27,8 @@ useHead({ title: 'Kara Krus · The live coin club' })
   <div>
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow"><i class="live-dot" /> THE LIVE COIN CLUB</p>
         <h1>One coin.<br>Two sides.<br><em>Your call.</em></h1>
-        <p class="lede">A classic Filipino game. A whole new atmosphere.<br>Pick your side, feel the moment, and watch it flip.</p>
+        <p class="lede">The classic Filipino coin toss, reimagined. Pick your side and watch it flip.</p>
         <div class="hero-cta">
           <NuxtLink :to="user ? '/lobby' : '/login'" class="btn btn-gold">Take a seat</NuxtLink>
           <button type="button" class="btn btn-ghost" @click="show">▷ How it works</button>
@@ -37,14 +36,9 @@ useHead({ title: 'Kara Krus · The live coin club' })
         <p class="hero-people"><span class="avatars"><i>A</i><i>M</i><i>J</i></span> Made for the moment.<br>Better with a room full of people.</p>
       </div>
       <div class="hero-art" aria-hidden="true">
-        <p class="hero-note">THE ODDS ARE A FEELING.</p>
         <CoinFace side="kara" :size="280" class="hero-coin-a" />
         <CoinFace side="krus" :size="220" class="hero-coin-b" />
         <span class="hero-ribbon">✦ ONE TOSS. ENDLESS POSSIBILITIES.</span>
-        <small class="hero-cap">01 / THE ORIGINAL COIN TOSS</small>
-      </div>
-      <div class="hero-foot">
-        <span>INSTINCT MEETS POSSIBILITY</span><span>EXPLORE THE CLUB ⌄</span><span>EST. 2026 · PILIPINAS</span>
       </div>
     </section>
 

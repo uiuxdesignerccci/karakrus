@@ -46,9 +46,9 @@ useHead({ title: 'Live lobby · Kara Krus' })
     <p class="muted">A room for every mood. Choose your seat and make your call.</p>
 
     <div class="stat-bar">
-      <div><span aria-hidden="true">((•))</span><b>{{ takingBets }}</b><small>Taking bets</small></div>
-      <div><span aria-hidden="true">⚇</span><b>{{ participants }}</b><small>Round participants</small></div>
-      <div><span aria-hidden="true">◎</span><b>{{ formatCredits(inPlay) }}</b><small>Credits in play</small></div>
+      <div><span aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2" /><path d="M16.2 7.8a6 6 0 0 1 0 8.4M7.8 16.2a6 6 0 0 1 0-8.4M19.1 4.9a10 10 0 0 1 0 14.2M4.9 19.1a10 10 0 0 1 0-14.2" /></svg></span><b>{{ takingBets }}</b><small>Taking bets</small></div>
+      <div><span aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5" /><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.2a6.5 6.5 0 0 1 3.5 5.8" /></svg></span><b>{{ participants }}</b><small>Round participants</small></div>
+      <div><span aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="7" rx="6" ry="3" /><path d="M3 7v5c0 1.7 2.7 3 6 3s6-1.3 6-3V7" /><path d="M9 15v2c0 1.7 2.7 3 6 3s6-1.3 6-3v-5c0-1.7-2.7-3-6-3" /></svg></span><b>{{ formatCredits(inPlay) }}</b><small>Credits in play</small></div>
     </div>
 
     <div class="toolbar">

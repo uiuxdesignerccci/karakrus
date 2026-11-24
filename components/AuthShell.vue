@@ -15,7 +15,6 @@ withDefaults(defineProps<{
       <template v-if="variant === 'admin'">
         <p class="eyebrow">BEHIND EVERY GREAT ROUND</p>
         <h1>Run the room.<br><em>Set the rhythm.</em></h1>
-        <NuxtLink to="/login" class="btn btn-ghost small">Player portal</NuxtLink>
       </template>
       <template v-else-if="pitch === 'register'">
         <p class="eyebrow">THE MOMENT BEFORE THE FLIP</p>

@@ -95,6 +95,11 @@ export function settleRound(room: Room, result: Side) {
 
 const COOKIE = 'kk_session'
 
+/** A room as a signed-out visitor may see it: stream playback URLs are withheld. */
+export function guestRoom(room: Room): Room {
+  return { ...room, srs_whep_url: '', staff_srs_whep_url: '' }
+}
+
 export function publicUser(u: StoredUser): User {
   const { password: _password, ...rest } = u
   return rest

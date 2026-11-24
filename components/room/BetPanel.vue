@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { Room, Side } from '~/types'
 
-const props = defineProps<{ room: Room; balance: number; placing?: boolean }>()
+const props = defineProps<{ room: Room; balance: number; placing?: boolean; guest?: boolean }>()
+const route = useRoute()
 const emit = defineEmits<{ place: [side: Side, amountCr: number] }>()
 
 const side = ref<Side>('kara')
@@ -10,7 +11,7 @@ const amount = ref<number>(props.room.min_bet / 100)
 const minCr = computed(() => props.room.min_bet / 100)
 const maxCr = computed(() => props.room.max_bet / 100)
 const pool = computed(() => props.room.pool_kara + props.room.pool_krus)
-const canBet = computed(() => props.room.status === 'open' && !props.placing)
+const canBet = computed(() => !props.guest && props.room.status === 'open' && !props.placing)
 const estimate = computed(() => estimateReturn(props.room, side.value, Math.round(amount.value * 100)))
 const invalid = computed(() => !Number.isFinite(amount.value) || amount.value < minCr.value || amount.value > maxCr.value)
 
@@ -58,9 +59,9 @@ const cta = computed(() => (canBet.value ? `Bet ${amount.value} CR on ${SIDE_LAB
     </div>
     <p class="fine">Includes your current {{ side }} bets and this new bet. Changes with the pool. 5% fee included.</p>
 
-    <button type="button" class="btn btn-gold wide" :disabled="!canBet || invalid" @click="emit('place', side, amount)">
-      {{ cta }} <span aria-hidden="true">↗</span>
+    <NuxtLink v-if="guest" :to="{ path: '/login', query: { redirect: route.fullPath } }" class="btn btn-gold wide">Sign in to bet</NuxtLink>
+    <button v-else type="button" class="btn btn-gold wide" :disabled="!canBet || invalid" @click="emit('place', side, amount)">
+      {{ cta }}
     </button>
-    <p class="fine center">Demo balance: {{ formatCredits(balance) }} CR</p>
   </aside>
 </template>

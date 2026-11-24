@@ -1,7 +1,7 @@
-import { db, requireUser, tickRooms } from '../../utils/db'
+import { db, getSessionUser, guestRoom, tickRooms } from '../../utils/db'
 
 export default defineEventHandler((event) => {
-  requireUser(event)
+  const user = getSessionUser(event)
   tickRooms()
-  return { rooms: db.rooms }
+  return { rooms: user ? db.rooms : db.rooms.map(guestRoom) }
 })
