@@ -35,6 +35,7 @@ const toTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
         <h4>Club</h4>
         <NuxtLink v-if="!user" to="/login">Sign in</NuxtLink>
         <NuxtLink v-if="!user" to="/register">Join the club</NuxtLink>
+        <NuxtLink v-if="user" to="/profile">Your profile</NuxtLink>
         <NuxtLink to="/admin">Admin console</NuxtLink>
       </nav>
     </div>

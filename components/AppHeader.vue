@@ -26,7 +26,7 @@ const initial = computed(() => user.value?.firstName?.[0]?.toUpperCase() ?? '?')
       <div class="site-actions">
         <template v-if="user">
           <span class="wallet" title="Demo balance"><b>{{ formatCredits(user.balance) }}</b> <small>CR</small></span>
-          <span class="avatar" :title="`${user.firstName} ${user.lastName}`">{{ initial }}</span>
+          <NuxtLink to="/profile" class="avatar" :class="{ active: route.path === '/profile' }" :title="`${user.firstName} ${user.lastName} · Profile`" aria-label="Your profile">{{ initial }}</NuxtLink>
           <ThemeToggle />
           <button type="button" class="icon-btn" aria-label="Sign out" @click="logout">⎋</button>
         </template>

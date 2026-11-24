@@ -26,6 +26,10 @@ export default defineNuxtConfig({
         { name: 'color-scheme', content: 'light dark' },
         { name: 'theme-color', content: '#f4f0ff' },
       ],
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+        { rel: 'apple-touch-icon', href: '/logo-mark.png' },
+      ],
       script: [
         {
           // Apply the saved theme (or the system preference) before first paint to avoid a flash.
