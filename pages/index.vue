@@ -14,7 +14,8 @@ const taking = computed(() => rooms.value.filter((r) => r.status === 'open').len
 const inPlay = computed(() => rooms.value.reduce((n, r) => n + r.pool_kara + r.pool_krus, 0))
 
 const steps = [
-  { n: '01', title: 'Find your room', body: 'Take a seat with other players at a table that feels right.' },
+  { n: '01', title: 'Find your room', body: 'Take a seat with other players at a table that feels right.' }
+  ,
   { n: '02', title: 'Make your call', body: 'Kara or Krus? Place your demo credits before the timer ends.' },
   { n: '03', title: 'Watch the moment', body: 'One live toss. The host confirms. Winners share the pool.' },
 ]
