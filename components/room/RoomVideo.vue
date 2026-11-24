@@ -9,7 +9,7 @@ const hasStaff = computed(() => props.room.staff_stream_provider !== 'off')
 </script>
 
 <template>
-  <div class="video-wrap">
+  <div class="video-wrap" :class="{ 'has-staff': hasStaff }">
     <section class="video-host">
       <div class="video-stage">
         <span class="chip">{{ hasHost ? 'HOST VIDEO' : 'STREAM STANDBY' }}</span>

@@ -21,12 +21,13 @@ const initial = computed(() => user.value?.firstName?.[0]?.toUpperCase() ?? '?')
         <NuxtLink v-for="l in links" :key="l.to" :to="l.to" :class="{ active: isActive(l.to) }">
           {{ l.label }}<i v-if="l.live" class="live-dot" aria-hidden="true" />
         </NuxtLink>
-        <button type="button" class="nav-btn" @click="show">How to play <span aria-hidden="true">↗</span></button>
+        <button type="button" class="nav-btn" @click="show">How to play</button>
       </nav>
       <div class="site-actions">
         <template v-if="user">
           <span class="wallet" title="Demo balance"><b>{{ formatCredits(user.balance) }}</b> <small>CR</small></span>
           <span class="avatar" :title="`${user.firstName} ${user.lastName}`">{{ initial }}</span>
+          <ThemeToggle />
           <button type="button" class="icon-btn" aria-label="Sign out" @click="logout">⎋</button>
         </template>
         <NuxtLink v-else to="/login" class="btn btn-gold">Sign in</NuxtLink>

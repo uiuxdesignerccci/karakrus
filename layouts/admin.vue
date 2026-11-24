@@ -31,6 +31,7 @@ watch(() => route.path, () => (menuOpen.value = false))
         <button type="button" class="icon-btn admin-burger" aria-label="Menu" @click="menuOpen = !menuOpen">☰</button>
         <strong>{{ $route.meta.adminTitle ?? 'Admin console' }}</strong>
         <span class="admin-badge">Admin console <b>HOST</b></span>
+        <ThemeToggle />
       </header>
       <main class="admin-main"><slot /></main>
     </div>
