@@ -836,3 +836,33 @@ select {
 @media (max-width: 1200px) { .admin { --admin-pad-x: 36px; --admin-pad-top: 36px; } }
 @media (max-width: 960px) { .admin { --admin-pad-x: 24px; --admin-pad-top: 28px; } }
 @media (max-width: 560px) { .admin { --admin-pad-x: 16px; --admin-pad-top: 22px; } }
+
+/* ============ HERO: animated coins ============ */
+.hero-art { perspective: 1200px; }
+.hero-coin-a, .hero-coin-b { line-height: 0; will-change: transform; }
+.hero-coin-a { --tilt: -12deg; animation: hero-float 6s ease-in-out infinite; }
+.hero-coin-b { --tilt: 10deg; animation: hero-float 7s ease-in-out -2.5s infinite; }
+.hero-coin-spin { transform-style: preserve-3d; animation: hero-flip 4s cubic-bezier(.45, 0, .2, 1) infinite; }
+.hero-coin-b .hero-coin-spin { animation-delay: 2s; }
+.hero-coin-spin svg { display: block; }
+.hero-ribbon { animation: hero-ribbon 6s ease-in-out -1s infinite; }
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt)); }
+  50% { transform: translateY(-18px) rotate(calc(var(--tilt) + 4deg)); }
+}
+/* a quick double toss, then a long rest */
+@keyframes hero-flip {
+  0%, 62% { transform: translateY(0) rotateY(0); }
+  72% { transform: translateY(-34px) rotateY(360deg); }
+  82%, 100% { transform: translateY(0) rotateY(720deg); }
+}
+@keyframes hero-ribbon {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(-2deg) translateY(-6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-coin-a, .hero-coin-b, .hero-coin-spin, .hero-ribbon { animation: none; }
+  .hero-coin-a { transform: rotate(-12deg); }
+  .hero-coin-b { transform: rotate(10deg); }
+}

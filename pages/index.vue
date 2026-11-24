@@ -36,8 +36,8 @@ useHead({ title: 'Kara Krus · The live coin club' })
         <p class="hero-people"><span class="avatars"><i>A</i><i>M</i><i>J</i></span> Made for the moment.<br>Better with a room full of people.</p>
       </div>
       <div class="hero-art" aria-hidden="true">
-        <CoinFace side="kara" :size="280" class="hero-coin-a" />
-        <CoinFace side="krus" :size="220" class="hero-coin-b" />
+        <div class="hero-coin-a"><div class="hero-coin-spin"><CoinFace side="kara" :size="280" /></div></div>
+        <div class="hero-coin-b"><div class="hero-coin-spin"><CoinFace side="krus" :size="220" /></div></div>
         <span class="hero-ribbon">✦ ONE TOSS. ENDLESS POSSIBILITIES.</span>
       </div>
     </section>
