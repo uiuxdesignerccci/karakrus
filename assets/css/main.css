@@ -1025,7 +1025,7 @@ h3 + p.muted { margin-top: 4px; }
 @media (max-width: 960px) {
   /* home hero: stack naturally instead of filling the viewport */
   .hero { min-height: 0; padding: 32px 20px 16px; gap: 28px; align-content: start; }
-  .hero h1 { font-size: clamp(44px, 8vw, 60px); }
+  .hero h1 { font-size: clamp(52px, 9vw, 70px); }
   /* coins form one overlapping pair centred in the blob */
   .hero-art { width: min(100%, 440px); height: 330px; margin: 0 auto; }
   .hero-art::before, .hero-art::after { inset: 2% 3% 14%; }
@@ -1047,7 +1047,7 @@ h3 + p.muted { margin-top: 4px; }
   .auth-card { margin: 0; }
 }
 @media (max-width: 560px) {
-  .hero h1 { font-size: clamp(34px, 10.5vw, 42px); margin-bottom: 16px; }
+  .hero h1 { font-size: clamp(42px, 13.2vw, 52px); margin-bottom: 16px; }
   .lede { margin-bottom: 20px; }
   .hero-cta { margin-bottom: 20px; }
   .hero-art { height: 270px; }
