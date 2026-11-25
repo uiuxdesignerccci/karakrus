@@ -1,5 +1,5 @@
 <template>
-  <div class="shell">
+  <div class="shell shell-auth">
     <ThemeToggle class="floating" />
     <main class="shell-main">
       <slot />
