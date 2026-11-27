@@ -39,7 +39,9 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
           <span class="wallet" title="Demo balance"><b>{{ formatCredits(user.balance) }}</b> <small>CR</small></span>
           <NuxtLink to="/profile" class="avatar" :class="{ active: route.path === '/profile' }" :title="`${user.firstName} ${user.lastName} · Profile`" aria-label="Your profile">{{ initial }}</NuxtLink>
           <ThemeToggle class="desktop-only" />
-          <button type="button" class="icon-btn desktop-only" aria-label="Sign out" @click="logout">⎋</button>
+          <button type="button" class="signout-btn desktop-only" aria-label="Sign out" title="Sign out" @click="logout">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5.5A2.5 2.5 0 0 1 3 18.5v-13A2.5 2.5 0 0 1 5.5 3H9" /><path d="m16 17 5-5-5-5M21 12H9" /></svg>
+          </button>
         </template>
         <template v-else>
           <ThemeToggle class="desktop-only" />

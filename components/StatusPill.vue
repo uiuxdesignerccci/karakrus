@@ -5,5 +5,5 @@ defineProps<{ status: RoomStatus }>()
 </script>
 
 <template>
-  <span class="pill" :class="`pill-${status}`"><i aria-hidden="true" />{{ STATUS_LABEL[status] }}</span>
+  <span class="pill" :class="`pill-${status}`">{{ STATUS_LABEL[status] }}</span>
 </template>

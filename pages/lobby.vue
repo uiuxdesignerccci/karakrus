@@ -14,7 +14,7 @@ const tab = ref<Tab>('all')
 const query = ref('')
 
 const tabs: { key: Tab; label: string }[] = [
-  { key: 'all', label: 'All rooms' },
+  { key: 'all', label: 'All tables' },
   { key: 'open', label: 'Betting open' },
   { key: 'between', label: 'Between rounds' },
 ]
@@ -43,7 +43,7 @@ useHead({ title: 'Lobby · Kara Krus' })
   <div class="page">
     <p class="eyebrow">THE LIVE LOBBY</p>
     <h1 class="page-title">Your table awaits, {{ user?.firstName }}.</h1>
-    <p class="muted">A room for every mood. Choose your seat and make your call.</p>
+    <p class="muted">A table for every mood. Choose your seat and make your call.</p>
 
     <div class="stat-bar">
       <div><span aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2" /><path d="M16.2 7.8a6 6 0 0 1 0 8.4M7.8 16.2a6 6 0 0 1 0-8.4M19.1 4.9a10 10 0 0 1 0 14.2M4.9 19.1a10 10 0 0 1 0-14.2" /></svg></span><b>{{ takingBets }}</b><small>Taking bets</small></div>
@@ -55,12 +55,12 @@ useHead({ title: 'Lobby · Kara Krus' })
       <div class="tabs" role="tablist">
         <button v-for="t in tabs" :key="t.key" type="button" role="tab" :aria-selected="tab === t.key" :class="{ active: tab === t.key }" @click="tab = t.key">{{ t.label }}</button>
       </div>
-      <input v-model="query" type="search" class="search" placeholder="Search for a room…" aria-label="Search for a room">
+      <input v-model="query" type="search" class="search" placeholder="Search for a table…" aria-label="Search for a table">
     </div>
 
     <div v-if="filtered.length" class="room-grid">
       <RoomCard v-for="r in filtered" :key="r.id" :room="r" />
     </div>
-    <p v-else class="muted empty">No rooms match right now.</p>
+    <p v-else class="muted empty">No tables match right now.</p>
   </div>
 </template>

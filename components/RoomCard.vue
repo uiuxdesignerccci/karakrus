@@ -32,7 +32,7 @@ const variant = computed(() => (props.room.id % 3 === 0 ? 'kara' : props.room.id
         <small>ROUND POOL</small>
         <b>{{ formatCredits(pool) }} CR</b>
       </div>
-      <span class="btn btn-ghost room-enter">Enter room</span>
+      <span class="btn btn-ghost room-enter">Join table</span>
     </div>
   </NuxtLink>
 </template>
